@@ -1,20 +1,19 @@
-﻿namespace Eshop.Application.Shared
+﻿namespace Eshop.Application.Shared;
+
+public class ProductDto
 {
-    public class ProductDto
+    public Guid Id { get; private set; }
+
+    public int Quantity { get; private set; }
+
+    private ProductDto()
     {
-        public Guid Id { get; private set; }
 
-        public int Quantity { get; private set; }
+    }
 
-        private ProductDto()
-        {
-
-        }
-
-        public ProductDto(Guid id, int quantity)
-        {
-            Id = id;
-            Quantity = quantity;
-        }
+    public ProductDto(Guid id, int quantity)
+    {
+        Id = id;
+        Quantity = quantity;
     }
 }

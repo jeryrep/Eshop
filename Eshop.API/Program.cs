@@ -1,48 +1,37 @@
 using Eshop.Application;
 using Eshop.Infrastructure;
 using Microsoft.OpenApi.Models;
+using MongoDB.Bson;
 
-namespace Eshop.API
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.RegistryInfrastructure(builder.Configuration);
+builder.Services.RegistryApplication();
+
+builder.Services
+    .AddAutoMapper(typeof(Program))
+    .AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly))
+    .AddControllers();
+builder.Services.AddSwaggerGen(c =>
 {
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            var builder = WebApplication.CreateBuilder(args);
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+});
 
-            builder.Services.RegistryInfrastructure(builder.Configuration);
-            builder.Services.RegistryApplication();
+var app = builder.Build();
 
-            builder.Services.AddAutoMapper(typeof(Program));
+if (builder.Environment.IsDevelopment()) app.UseDeveloperExceptionPage();
 
-            builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
+app.UseRouting();
+app.MapControllers();
 
-            builder.Services.AddControllers();
-            builder.Services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
-            });
+app
+    .UseSwagger()
+    .UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+    c.RoutePrefix = string.Empty;
+});
 
-            var app = builder.Build();
+BsonDefaults.GuidRepresentationMode = GuidRepresentationMode.V3;
 
-            if (builder.Environment.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
-            app.UseRouting();
-
-            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
-
-            app.UseSwagger();
-
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-                c.RoutePrefix = string.Empty; 
-            });
-
-            app.Run();
-        }
-    }
-}
+await app.RunAsync();

@@ -1,8 +1,10 @@
 ﻿using Eshop.Domain.SeedWork;
 
+namespace Eshop.Infrastructure.Database;
+
 internal class EntityTracker : IEntityTracker
 {
-    private readonly List<Entity> _trackedEntities = new List<Entity>();
+    private readonly List<Entity> _trackedEntities = [];
 
     public void TrackEntity(Entity entity)
     {

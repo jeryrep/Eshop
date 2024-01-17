@@ -1,20 +1,19 @@
-﻿namespace Eshop.Application.Shared
+﻿namespace Eshop.Application.Shared;
+
+public class OrderDto
 {
-    public class OrderDto
+    public Guid Id { get; }
+
+    public List<ProductDto> Products { get; }
+
+    private OrderDto()
     {
-        public Guid Id { get; }
+        Products = new List<ProductDto>();
+    }
 
-        public List<ProductDto> Products { get; }
-
-        private OrderDto()
-        {
-            Products = new List<ProductDto>();
-        }
-
-        public OrderDto(Guid id, List<ProductDto> products)
-        {
-            Id = id;
-            Products = products ?? throw new ArgumentNullException(nameof(products));
-        }
+    public OrderDto(Guid id, List<ProductDto> products)
+    {
+        Id = id;
+        Products = products ?? throw new ArgumentNullException(nameof(products));
     }
 }

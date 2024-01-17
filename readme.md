@@ -1,16 +1,16 @@
 # Laboratorium 5: Wprowadzenie do Domain Driven Design (DDD) oraz Command Query Responsibility Segregation (CQRS)
 
 ## Cel zadania
-Celem tego laboratorium jest praktyczne zapoznanie siê z kluczowymi aspektami Domain Driven Design (DDD) oraz podstawami Command Query Responsibility Segregation (CQRS). Przed rozpoczêciem, zapoznaj siê z dostêpnym kodem. W razie pytañ, skontaktuj siê przez platformê Teams.
+Celem tego laboratorium jest praktyczne zapoznanie siÄ™ z kluczowymi aspektami Domain Driven Design (DDD) oraz podstawami Command Query Responsibility Segregation (CQRS). Przed rozpoczÄ™ciem, zapoznaj siÄ™ z dostÄ™pnym kodem. W razie pytaÅ„, skontaktuj siÄ™ przez platformÄ™ Teams.
 
-### Wskazówki:
-- Pamiêtaj o odpowiednim oddzieleniu warstwy domenowej, aplikacji oraz infrastruktury (w ramach uproszczenia w tym projekcie modele domeny oraz infrastruktury s¹ takie same).
-- Staraj siê trzymaæ zasad SOLID w trakcie projektowania klas.
-- Projekt uruchamia siê pod adresem http://localhost:8080
-- Do po³¹czenia z baz¹ danych mo¿esz u¿yæ narzêdzi takich jak Studio3T. Wymagany jest nastêpuj¹cy ci¹g po³¹czeniowy: `mongodb://root:example@eshop.mongodb:27017`.
-- Podczas instalacji Visual Studio upewnij siê, ¿e zainstalowa³eœ pakiet ASP.NET and web development.
-- Zachecam do stworzenia klona tego repozytorum, w przypadku potrzeby dodania poprawek z mojej strony bêdzie Pañstwu ³atwiej siê z nimi integrowaæ. 
-- Przyk³adowe zapytania
+### WskazÃ³wki:
+- PamiÄ™taj o odpowiednim oddzieleniu warstwy domenowej, aplikacji oraz infrastruktury (w ramach uproszczenia w tym projekcie modele domeny oraz infrastruktury sÄ… takie same).
+- Staraj siÄ™ trzymaÄ‡ zasad SOLID w trakcie projektowania klas.
+- Projekt uruchamia siÄ™ pod adresem http://localhost:8080
+- Do poÅ‚Ä…czenia z bazÄ… danych moÅ¼esz uÅ¼yÄ‡ narzÄ™dzi takich jak Studio3T. Wymagany jest nastÄ™pujÄ…cy ciÄ…g poÅ‚Ä…czeniowy: `mongodb://root:example@eshop.mongodb:27017`.
+- Podczas instalacji Visual Studio upewnij siÄ™, Å¼e zainstalowaÅ‚eÅ› pakiet ASP.NET and web development.
+- Zachecam do stworzenia klona tego repozytorum, w przypadku potrzeby dodania poprawek z mojej strony bÄ™dzie PaÅ„stwu Å‚atwiej siÄ™ z nimi integrowaÄ‡. 
+- PrzykÅ‚adowe zapytania
     - POST /api/v1/customers/{customerId}/orders
         - customerId: 3fa85f64-5717-4562-b3fc-2c963f66afa6
         - products id bazuje na `ProductPriceDataApi`
@@ -42,40 +42,40 @@ Celem tego laboratorium jest praktyczne zapoznanie siê z kluczowymi aspektami Do
         }
         ```
     - GET /api/v1/orders/{orderId}
-        - orderd: Wartoœæ zwrócona przez zapytanie POST
+        - orderd: WartoÅ›Ä‡ zwrÃ³cona przez zapytanie POST
         
-- Z powodów technicznych (serializacja) wszystkie w³aœciwoœci modeli domnenowych musz¹ mieæ settery i gettery np. `public Guid Id { get; private set; }`
+- Z powodÃ³w technicznych (serializacja) wszystkie wÅ‚aÅ›ciwoÅ›ci modeli domnenowych muszÄ… mieÄ‡ settery i gettery np. `public Guid Id { get; private set; }`
 
-### Ocena 3.5: Tworzenie nowych u¿ytkowników
-Twoim zadaniem jest zaimplementowanie funkcjonalnoœci tworzenia nowych u¿ytkowników przy u¿yciu agregatu `Customer`.
-1. Utwórz klasy `CreateCustomerCommand` i `GetCustomerQuery`.
-2. Zaimplementuj obs³ugê tych komend i zapytañ.
+### Ocena 3.5: Tworzenie nowych uÅ¼ytkownikÃ³w
+Twoim zadaniem jest zaimplementowanie funkcjonalnoÅ›ci tworzenia nowych uÅ¼ytkownikÃ³w przy uÅ¼yciu agregatu `Customer`.
+1. UtwÃ³rz klasy `CreateCustomerCommand` i `GetCustomerQuery`.
+2. Zaimplementuj obsÅ‚ugÄ™ tych komend i zapytaÅ„.
 3. Dodaj odpowiednie endpointy do API.
-4. Upewnij siê, ¿e po stworzeniu klienta generowane jest zdarzenie `CustomerCreatedEvent`.
+4. Upewnij siÄ™, Å¼e po stworzeniu klienta generowane jest zdarzenie `CustomerCreatedEvent`.
 
-Pamiêtaj aby stworzyæ now¹ kolekcjê dla tego u¿ytkoników w bazie danych. 
+PamiÄ™taj aby stworzyÄ‡ nowÄ… kolekcjÄ™ dla tego uÅ¼ytkonikÃ³w w bazie danych. 
 
-Zwróæ szczegególn¹ uwagê na aby do warstwy API nie dosta³y siê modele domenowe!
+ZwrÃ³Ä‡ szczegegÃ³lnÄ… uwagÄ™ na aby do warstwy API nie dostaÅ‚y siÄ™ modele domenowe!
 
-### Ocena 3.5: Implementacja regu³ biznesowych
-Stwórz nastêpuj¹ce regu³y biznesowe (np. `OrderMustHaveAtLeastOneProductRule`):
-1. Nazwa u¿ytkownika nie mo¿e byæ pusta i powinna sk³adaæ siê tylko z liter.
-2. £¹czny koszt produktów w zamówieniu nie mo¿e przekroczyæ 15000.
+### Ocena 3.5: Implementacja reguÅ‚ biznesowych
+StwÃ³rz nastÄ™pujÄ…ce reguÅ‚y biznesowe (np. `OrderMustHaveAtLeastOneProductRule`):
+1. Nazwa uÅ¼ytkownika nie moÅ¼e byÄ‡ pusta i powinna skÅ‚adaÄ‡ siÄ™ tylko z liter.
+2. ÅÄ…czny koszt produktÃ³w w zamÃ³wieniu nie moÅ¼e przekroczyÄ‡ 15000.
 
-### Ocena 4.5: Obs³uga koszyka produktów
-Twoim zadaniem jest zaimplementowanie obs³ugi koszyka produktów.
-1. Stwórz nowy agregat do obs³ugi koszyka z produktami.
-2. Dodaj odpowiednie komendy (commands) i zapytania (queries) do zarz¹dzania koszykiem.
+### Ocena 4.5: ObsÅ‚uga koszyka produktÃ³w
+Twoim zadaniem jest zaimplementowanie obsÅ‚ugi koszyka produktÃ³w.
+1. StwÃ³rz nowy agregat do obsÅ‚ugi koszyka z produktami.
+2. Dodaj odpowiednie komendy (commands) i zapytania (queries) do zarzÄ…dzania koszykiem.
 3. Dodaj odpowiednie endpointy do API.
-4. Przerób implementacjê `Order`, aby by³a twrzona w za pomoc¹ nastêpuj¹cej metody `public static Order Create(CheckoutCart checkoutCart)`
+4. PrzerÃ³b implementacjÄ™ `Order`, aby byÅ‚a twrzona w za pomocÄ… nastÄ™pujÄ…cej metody `public static Order Create(CheckoutCart checkoutCart)`
 
 
-**Uwaga:** Utwórz now¹ kolekcjê dla tej funkcjonalnoœci w bazie danych.
+**Uwaga:** UtwÃ³rz nowÄ… kolekcjÄ™ dla tej funkcjonalnoÅ›ci w bazie danych.
 
 ### Ocena 5.0: Integracja z innym projektem
-Za pomoc¹ Refit (https://github.com/reactiveui/refit) nawi¹¿ po³¹czenie z projektem z laboratorium 2, aby pobraæ informacje o produktach. Podczas integracji zwróæ uwagê na wykorzystanie kontenerów.
+Za pomocÄ… Refit (https://github.com/reactiveui/refit) nawiÄ…Å¼ poÅ‚Ä…czenie z projektem z laboratorium 2, aby pobraÄ‡ informacje o produktach. Podczas integracji zwrÃ³Ä‡ uwagÄ™ na wykorzystanie kontenerÃ³w.
 
-Przyk³adowy interfejs do wykorzystania:
+PrzykÅ‚adowy interfejs do wykorzystania:
 
 ```csharp
 public interface IProductsApi

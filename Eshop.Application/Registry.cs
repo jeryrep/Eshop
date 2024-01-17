@@ -1,14 +1,18 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Eshop.Application.Customers.Queries;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace Eshop.Application
+namespace Eshop.Application;
+
+public static class Registry
 {
-    public static class Registry
+    public static void RegistryApplication(this IServiceCollection services)
     {
-        public static void RegistryApplication(this IServiceCollection services)
-        {
-            services.AddAutoMapper(typeof(Registry));
+        services.AddAutoMapper(typeof(Registry));
 
-            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Registry).Assembly));
-        }
+        services.AddMediatR(cfg =>
+        {
+            cfg.RegisterServicesFromAssembly(typeof(Registry).Assembly);
+            cfg.RegisterServicesFromAssembly(typeof(GetCustomerQueryHandler).Assembly);
+        });
     }
 }
